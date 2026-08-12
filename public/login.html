@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion — Prestivo Admin</title>
+<link rel="icon" type="image/png" href="images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400..700&family=EB+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="login-shell">
+  <div class="login-card">
+    <img src="images/logo.svg" alt="Prestivo" class="login-logo">
+    <h1>Espace Admin</h1>
+    <p class="sub">Connecte-toi pour gérer les commandes</p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn" id="submitBtn">Se connecter</button>
+      <p class="error-msg" id="errorMsg"></p>
+    </form>
+
+    <p class="login-hint">Accès réservé à l'équipe Prestivo.</p>
+  </div>
+</div>
+
+<script>
+  const API_BASE = window.location.origin;
+
+  // Si déjà connecté, on redirige directement vers le dashboard.
+  fetch(`${API_BASE}/api/me`, { credentials: "include" })
+    .then(r => { if (r.ok) window.location.href = "/dashboard"; })
+    .catch(() => {});
+
+  const form = document.getElementById("loginForm");
+  const errorMsg = document.getElementById("errorMsg");
+  const submitBtn = document.getElementById("submitBtn");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorMsg.classList.remove("show");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Connexion...";
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        errorMsg.textContent = data.error || "Une erreur est survenue.";
+        errorMsg.classList.add("show");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Se connecter";
+        return;
+      }
+
+      window.location.href = "/dashboard";
+    } catch (err) {
+      errorMsg.textContent = "Impossible de contacter le serveur.";
+      errorMsg.classList.add("show");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Se connecter";
+    }
+  });
+</script>
+
+</body>
+</html>

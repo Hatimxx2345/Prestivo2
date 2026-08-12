@@ -1,0 +1,8 @@
+<svg viewBox="0 0 270 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Prestivo">
+  <g stroke="#A07C2E" fill="#A07C2E">
+    <path d="M18 14 L26 30 L18 46 L10 30 Z" fill="none" stroke-width="1.6"/>
+    <circle cx="18" cy="30" r="2.6"/>
+  </g>
+  <line x1="36" y1="12" x2="36" y2="48" stroke="#A07C2E" stroke-width="1" opacity="0.55"/>
+  <text x="48" y="39" font-family="Georgia, 'Times New Roman', serif" font-size="27" letter-spacing="3.2" fill="#16241A">PRESTIVO</text>
+</svg>

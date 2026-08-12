@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Prestivo Admin</title>
+<link rel="icon" type="image/png" href="images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400..700&family=EB+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="dash-header">
+  <div class="dash-header-inner">
+    <div class="dash-brand">
+      <img src="images/logo.svg" alt="Prestivo" class="dash-logo">
+      <span class="dash-title">Prestivo <span>Admin</span></span>
+    </div>
+    <div class="dash-user">
+      <span class="dash-email" id="userEmail"></span>
+      <button class="btn-small" id="logoutBtn">Déconnexion</button>
+    </div>
+  </div>
+</header>
+
+<main class="dash-main">
+
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="num" id="statTotal">–</div><div class="label">Total</div></div>
+    <div class="stat-card accent"><div class="num" id="statNouveau">–</div><div class="label">Nouveau</div></div>
+    <div class="stat-card"><div class="num" id="statContacte">–</div><div class="label">Contacté</div></div>
+    <div class="stat-card"><div class="num" id="statConfirme">–</div><div class="label">Confirmé</div></div>
+    <div class="stat-card"><div class="num" id="statAnnule">–</div><div class="label">Annulé</div></div>
+    <div class="stat-card"><div class="num" id="statWeek">–</div><div class="label">Cette semaine</div></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="status-tabs" id="statusTabs">
+      <button class="status-tab active" data-status="">Toutes</button>
+      <button class="status-tab" data-status="nouveau">Nouveau</button>
+      <button class="status-tab" data-status="contacte">Contacté</button>
+      <button class="status-tab" data-status="confirme">Confirmé</button>
+      <button class="status-tab" data-status="annule">Annulé</button>
+    </div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" width="15" height="15"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInput" placeholder="Rechercher un client, une ville...">
+    </div>
+  </div>
+
+  <div class="orders-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Téléphone</th>
+          <th>Ville</th>
+          <th>Produit</th>
+          <th>Statut</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="ordersBody"></tbody>
+    </table>
+    <div class="empty-state" id="emptyState" hidden>Aucune commande pour le moment.</div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const API_BASE = window.location.origin;
+  let allOrders = [];
+  let currentStatus = "";
+  let currentSearch = "";
+
+  const STATUS_LABELS = {
+    nouveau: "Nouveau",
+    contacte: "Contacté",
+    confirme: "Confirmé",
+    annule: "Annulé",
+  };
+
+  function toast(msg){
+    const el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    setTimeout(() => el.classList.remove("show"), 2600);
+  }
+
+  async function checkAuth(){
+    try{
+      const res = await fetch(`${API_BASE}/api/me`, { credentials: "include" });
+      if(!res.ok){ window.location.href = "/login"; return; }
+      const data = await res.json();
+      document.getElementById("userEmail").textContent = data.email;
+    }catch{
+      window.location.href = "/login";
+    }
+  }
+
+  async function loadStats(){
+    const res = await fetch(`${API_BASE}/api/stats`, { credentials: "include" });
+    if(!res.ok) return;
+    const s = await res.json();
+    document.getElementById("statTotal").textContent = s.total;
+    document.getElementById("statNouveau").textContent = s.nouveau;
+    document.getElementById("statContacte").textContent = s.contacte;
+    document.getElementById("statConfirme").textContent = s.confirme;
+    document.getElementById("statAnnule").textContent = s.annule;
+    document.getElementById("statWeek").textContent = s.thisWeek;
+  }
+
+  async function loadOrders(){
+    const url = new URL(`${API_BASE}/api/orders`);
+    if(currentStatus) url.searchParams.set("status", currentStatus);
+    const res = await fetch(url, { credentials: "include" });
+    if(!res.ok){
+      if(res.status === 401) window.location.href = "/login";
+      return;
+    }
+    const data = await res.json();
+    allOrders = data.orders;
+    render();
+  }
+
+  function formatDate(iso){
+    const d = new Date(iso);
+    return d.toLocaleDateString("fr-FR", { day:"2-digit", month:"short", year:"numeric" }) +
+      " · " + d.toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" });
+  }
+
+  function render(){
+    const tbody = document.getElementById("ordersBody");
+    const empty = document.getElementById("emptyState");
+    const q = currentSearch.toLowerCase();
+
+    const filtered = allOrders.filter(o => {
+      if(!q) return true;
+      const hay = `${o.firstname} ${o.lastname} ${o.city} ${o.email} ${o.product}`.toLowerCase();
+      return hay.includes(q);
+    });
+
+    if(filtered.length === 0){
+      tbody.innerHTML = "";
+      empty.hidden = false;
+      return;
+    }
+    empty.hidden = true;
+
+    tbody.innerHTML = filtered.map(o => `
+      <tr data-id="${o.id}">
+        <td>
+          <span class="cell-name">${escapeHtml(o.firstname)} ${escapeHtml(o.lastname)}</span>
+          <span class="cell-sub">${escapeHtml(o.email)}</span>
+        </td>
+        <td>${escapeHtml(o.phone)}</td>
+        <td>${escapeHtml(o.city)}</td>
+        <td class="cell-product">${escapeHtml(o.product || "—")}</td>
+        <td>
+          <select class="status-select ${o.status}" data-id="${o.id}">
+            ${Object.entries(STATUS_LABELS).map(([val, label]) =>
+              `<option value="${val}" ${o.status === val ? "selected" : ""}>${label}</option>`
+            ).join("")}
+          </select>
+        </td>
+        <td class="cell-date">${formatDate(o.createdAt)}</td>
+        <td>
+          <button class="icon-btn" data-delete="${o.id}" title="Supprimer">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg>
+          </button>
+        </td>
+      </tr>
+    `).join("");
+  }
+
+  function escapeHtml(str){
+    return String(str ?? "").replace(/[&<>"']/g, m => ({
+      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+    }[m]));
+  }
+
+  document.getElementById("statusTabs").addEventListener("click", (e) => {
+    const btn = e.target.closest(".status-tab");
+    if(!btn) return;
+    document.querySelectorAll(".status-tab").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentStatus = btn.dataset.status;
+    loadOrders();
+  });
+
+  document.getElementById("searchInput").addEventListener("input", (e) => {
+    currentSearch = e.target.value;
+    render();
+  });
+
+  document.getElementById("ordersBody").addEventListener("change", async (e) => {
+    const select = e.target.closest(".status-select");
+    if(!select) return;
+    const id = select.dataset.id;
+    const newStatus = select.value;
+    select.className = `status-select ${newStatus}`;
+
+    const res = await fetch(`${API_BASE}/api/orders/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ status: newStatus }),
+    });
+    if(res.ok){
+      toast("Statut mis à jour");
+      loadStats();
+      const order = allOrders.find(o => o.id === id);
+      if(order) order.status = newStatus;
+    } else {
+      toast("Erreur lors de la mise à jour");
+    }
+  });
+
+  document.getElementById("ordersBody").addEventListener("click", async (e) => {
+    const btn = e.target.closest("[data-delete]");
+    if(!btn) return;
+    const id = btn.dataset.delete;
+    if(!confirm("Supprimer définitivement cette commande ?")) return;
+
+    const res = await fetch(`${API_BASE}/api/orders/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    if(res.ok){
+      toast("Commande supprimée");
+      allOrders = allOrders.filter(o => o.id !== id);
+      render();
+      loadStats();
+    } else {
+      toast("Erreur lors de la suppression");
+    }
+  });
+
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await fetch(`${API_BASE}/api/logout`, { method: "POST", credentials: "include" });
+    window.location.href = "/login";
+  });
+
+  (async function init(){
+    await checkAuth();
+    await loadStats();
+    await loadOrders();
+  })();
+</script>
+
+</body>
+</html>

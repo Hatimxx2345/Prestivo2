@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prestivo — Fashion</title>
+
+<link rel="icon" href="images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500;600&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a href="#top" class="logo-mark">
+      <img src="images/logo.svg" alt="Prestivo" class="logo-img">
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#shoes" data-i18n="nav.shoes">Chaussures</a>
+      <a href="#glasses" data-i18n="nav.glasses">Lunettes</a>
+      <a href="#watches" data-i18n="nav.watches">Montres</a>
+      <a href="#story" data-i18n="nav.story">Maison</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+
+    <div class="header-controls">
+      <div class="control-bar">
+        <div class="lang-switch" id="langSwitch">
+          <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="true" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="15" height="15" class="lang-globe"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M3 12h18M12 3c2.8 2.6 4.2 5.7 4.2 9s-1.4 6.4-4.2 9c-2.8-2.6-4.2-5.7-4.2-9s1.4-6.4 4.2-9Z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            <span class="lang-current">FR</span>
+            <svg viewBox="0 0 24 24" width="11" height="11" class="lang-chevron"><path d="M6 9 L12 15 L18 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="lang-menu" id="langMenu" role="listbox">
+            <button type="button" data-lang="fr" class="lang-btn active" role="option">Français</button>
+            <button type="button" data-lang="en" class="lang-btn" role="option">English</button>
+            <button type="button" data-lang="ar" class="lang-btn" role="option">العربية</button>
+          </div>
+        </div>
+        <span class="control-sep" aria-hidden="true"></span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.4"/><g stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.5" y2="4.5"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.8 8.8 0 0 0 4 12a8.5 8.5 0 0 0 8.5 8.5A8.8 8.8 0 0 0 20 14.5Z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-grid">
+
+    <div class="hero-copy reveal">
+      <p class="eyebrow" data-i18n="hero.eyebrow">Maison de mode — établie pour durer</p>
+      <h1 class="hero-title" data-i18n="hero.title">L'élégance ne <em>se démode</em> jamais</h1>
+      <p class="hero-sub" data-i18n="hero.sub">Chaussures, montres et lunettes façonnées pour ceux qui préfèrent la discrétion au bruit.</p>
+      <a href="#shoes" class="hero-link">
+        <span data-i18n="hero.cta">Découvrir la collection</span>
+        <svg viewBox="0 0 24 12" width="34" height="17"><path d="M0 6 H22 M16 1 L22 6 L16 11" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+      </a>
+
+      <ul class="trust-strip" aria-hidden="false">
+        <li><svg viewBox="0 0 24 24" width="15" height="15"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M20 7 9 18l-5-5"/></svg><span data-i18n="hero.trust1">Livraison discrète</span></li>
+        <li><svg viewBox="0 0 24 24" width="15" height="15"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M20 7 9 18l-5-5"/></svg><span data-i18n="hero.trust2">Paiement à la livraison</span></li>
+        <li><svg viewBox="0 0 24 24" width="15" height="15"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M20 7 9 18l-5-5"/></svg><span data-i18n="hero.trust3">Retours sous 14 jours</span></li>
+      </ul>
+    </div>
+
+    <div class="hero-visual reveal" style="--i:1">
+      <div class="hero-stripes" aria-hidden="true"></div>
+
+      <div class="hero-badge" aria-hidden="true">
+        <svg viewBox="0 0 140 140">
+          <path id="badgePath" d="M70,14 a56,56 0 1,1 -0.1,0" fill="none"/>
+          <text font-size="9.4" letter-spacing="2" fill="currentColor"><textPath href="#badgePath" data-i18n="hero.badge">Édition Limitée ✦ Édition Limitée ✦ Édition Limitée ✦ </textPath></text>
+        </svg>
+        <span class="badge-center">✦</span>
+      </div>
+
+      <div class="hero-collage">
+        <img src="images/shoe-white-shelf.jpg" alt="Prestivo — modèle blanc en boutique" class="hg hg-main">
+        <img src="images/shoe-black.jpg" alt="Prestivo — modèle noir" class="hg hg-side">
+        <div class="hero-tag reveal" style="--i:3">
+          <span class="hero-tag-title" data-i18n="shoes.title">Chaussures</span>
+          <span class="hero-tag-sub">320 DH</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 400 20"><line class="thread" x1="0" y1="10" x2="160" y2="10" stroke="currentColor" stroke-width="1"/><path d="M180 3 C184 8 190 9 200 10 C190 11 184 12 180 17 C176 12 170 11 160 10 C170 9 176 8 180 3 Z" fill="currentColor"/><line class="thread" x1="220" y1="10" x2="400" y2="10" stroke="currentColor" stroke-width="1"/></svg></div>
+
+<section class="collection" id="shoes">
+  <div class="collection-head reveal">
+    <span class="ref-tag">Réf. 01</span>
+    <h2 data-i18n="shoes.title">Chaussures</h2>
+    <p data-i18n="shoes.sub">Cuir pleine fleur, semelle légère, silhouette basse. Fabriquées pour l'usage quotidien d'une garde-robe qui ne crie jamais.</p>
+  </div>
+
+  <div class="product-grid">
+    <article class="product-card reveal" style="--i:0">
+      <div class="product-img">
+        <img src="images/shoe-black.jpg" alt="Prestivo Noir">
+        <span class="ref-tag small on-img">No. 014</span>
+      </div>
+      <div class="product-info">
+        <h3 data-i18n="shoes.p1.name">Le Noir Classique</h3>
+        <p class="product-desc" data-i18n="shoes.p1.desc">Cuir noir mat, laçage épais, semelle grise contrastée.</p>
+        <div class="product-footer">
+          <span class="price">320 DH</span>
+          <button type="button" class="btn-buy" data-i18n="shoes.buy">Acheter</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card reveal" style="--i:1">
+      <div class="product-img">
+        <img src="images/shoe-grey.jpg" alt="Prestivo Gris">
+        <span class="ref-tag small on-img">No. 015</span>
+      </div>
+      <div class="product-info">
+        <h3 data-i18n="shoes.p2.name">Le Gris Perle</h3>
+        <p class="product-desc" data-i18n="shoes.p2.desc">Tons gris doux, empiècements texturés, semelle translucide.</p>
+        <div class="product-footer">
+          <span class="price">320 DH</span>
+          <button type="button" class="btn-buy" data-i18n="shoes.buy">Acheter</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card reveal" style="--i:2">
+      <div class="product-img">
+        <img src="images/shoe-white.jpg" alt="Prestivo Blanc">
+        <span class="ref-tag small on-img">No. 016</span>
+      </div>
+      <div class="product-info">
+        <h3 data-i18n="shoes.p3.name">Le Blanc Signature</h3>
+        <p class="product-desc" data-i18n="shoes.p3.desc">Blanc immaculé, lignes épurées, l'incontournable de saison.</p>
+        <div class="product-footer">
+          <span class="price">320 DH</span>
+          <button type="button" class="btn-buy" data-i18n="shoes.buy">Acheter</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 400 20"><line class="thread" x1="0" y1="10" x2="160" y2="10" stroke="currentColor" stroke-width="1"/><path d="M180 3 C184 8 190 9 200 10 C190 11 184 12 180 17 C176 12 170 11 160 10 C170 9 176 8 180 3 Z" fill="currentColor"/><line class="thread" x1="220" y1="10" x2="400" y2="10" stroke="currentColor" stroke-width="1"/></svg></div>
+
+<section class="collection alt" id="glasses">
+  <div class="collection-head reveal">
+    <span class="ref-tag">Réf. 02</span>
+    <h2 data-i18n="glasses.title">Lunettes</h2>
+    <p data-i18n="glasses.sub">Montures en acétate et titane, verres polarisés. Une collection à venir, façonnée avec le même souci du détail.</p>
+  </div>
+
+  <div class="placeholder-grid">
+    <article class="placeholder-card reveal" style="--i:0">
+      <div class="placeholder-icon">
+        <svg viewBox="0 0 100 40" width="80" height="32"><circle cx="24" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="76" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="2"/><line x1="39" y1="18" x2="61" y2="18" stroke="currentColor" stroke-width="2"/><line x1="9" y1="16" x2="1" y2="10" stroke="currentColor" stroke-width="2"/><line x1="91" y1="16" x2="99" y2="10" stroke="currentColor" stroke-width="2"/></svg>
+      </div>
+      <h3 data-i18n="glasses.c1">Monture Ronde</h3>
+      <span class="soon" data-i18n="common.soon">Bientôt disponible</span>
+    </article>
+    <article class="placeholder-card reveal" style="--i:1">
+      <div class="placeholder-icon">
+        <svg viewBox="0 0 100 40" width="80" height="32"><rect x="9" y="8" width="30" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><rect x="61" y="8" width="30" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><line x1="39" y1="18" x2="61" y2="18" stroke="currentColor" stroke-width="2"/><line x1="9" y1="16" x2="1" y2="10" stroke="currentColor" stroke-width="2"/><line x1="91" y1="16" x2="99" y2="10" stroke="currentColor" stroke-width="2"/></svg>
+      </div>
+      <h3 data-i18n="glasses.c2">Monture Carrée</h3>
+      <span class="soon" data-i18n="common.soon">Bientôt disponible</span>
+    </article>
+    <article class="placeholder-card reveal" style="--i:2">
+      <div class="placeholder-icon">
+        <svg viewBox="0 0 100 40" width="80" height="32"><path d="M9 24 Q 12 8 26 8 Q 40 8 39 22 L 39 24" fill="none" stroke="currentColor" stroke-width="2"/><path d="M61 24 Q 60 22 60 22 Q 61 8 75 8 Q 89 8 91 24" fill="none" stroke="currentColor" stroke-width="2"/><line x1="39" y1="18" x2="61" y2="18" stroke="currentColor" stroke-width="2"/></svg>
+      </div>
+      <h3 data-i18n="glasses.c3">Monture Aviateur</h3>
+      <span class="soon" data-i18n="common.soon">Bientôt disponible</span>
+    </article>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 400 20"><line class="thread" x1="0" y1="10" x2="160" y2="10" stroke="currentColor" stroke-width="1"/><path d="M180 3 C184 8 190 9 200 10 C190 11 184 12 180 17 C176 12 170 11 160 10 C170 9 176 8 180 3 Z" fill="currentColor"/><line class="thread" x1="220" y1="10" x2="400" y2="10" stroke="currentColor" stroke-width="1"/></svg></div>
+
+<section class="collection" id="watches">
+  <div class="collection-head reveal">
+    <span class="ref-tag">Réf. 03</span>
+    <h2 data-i18n="watches.title">Montres</h2>
+    <p data-i18n="watches.sub">Mouvements suisses, boîtiers en acier brossé. Une collection à venir, dans l'esprit d'un héritage qui se transmet.</p>
+  </div>
+
+  <div class="placeholder-grid">
+    <article class="placeholder-card reveal" style="--i:3">
+      <div class="placeholder-icon">
+        <svg viewBox="0 0 60 60" width="52" height="52"><circle cx="30" cy="30" r="20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="30" y1="30" x2="30" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="30" y1="30" x2="39" y2="34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="24" y="4" width="12" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="24" y="49" width="12" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <h3 data-i18n="watches.c1">Automatique Classique</h3>
+      <span class="soon" data-i18n="common.soon">Bientôt disponible</span>
+    </article>
+    <article class="placeholder-card reveal" style="--i:4">
+      <div class="placeholder-icon">
+        <svg viewBox="0 0 60 60" width="52" height="52"><rect x="12" y="12" width="36" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="2"/><line x1="30" y1="30" x2="30" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="30" y1="30" x2="37" y2="30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <h3 data-i18n="watches.c2">Boîtier Carré</h3>
+      <span class="soon" data-i18n="common.soon">Bientôt disponible</span>
+    </article>
+    <article class="placeholder-card reveal" style="--i:5">
+      <div class="placeholder-icon">
+        <svg viewBox="0 0 60 60" width="52" height="52"><circle cx="30" cy="30" r="20" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="30" cy="30" r="14" fill="none" stroke="currentColor" stroke-width="1"/><line x1="30" y1="30" x2="30" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="30" y1="30" x2="36" y2="33" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <h3 data-i18n="watches.c3">Édition Minimaliste</h3>
+      <span class="soon" data-i18n="common.soon">Bientôt disponible</span>
+    </article>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 400 20"><line class="thread" x1="0" y1="10" x2="160" y2="10" stroke="currentColor" stroke-width="1"/><path d="M180 3 C184 8 190 9 200 10 C190 11 184 12 180 17 C176 12 170 11 160 10 C170 9 176 8 180 3 Z" fill="currentColor"/><line class="thread" x1="220" y1="10" x2="400" y2="10" stroke="currentColor" stroke-width="1"/></svg></div>
+
+<section class="story" id="story">
+  <div class="story-bg" aria-hidden="true">
+    <img src="images/shoe-white-shelf.jpg" alt="">
+  </div>
+  <span class="story-mono" aria-hidden="true">P</span>
+  <div class="story-inner reveal">
+    <span class="ref-tag">Réf. 00</span>
+    <h2 data-i18n="story.title">La Maison</h2>
+    <p data-i18n="story.p1">Prestivo est née d'une conviction simple : le vrai style ne se remarque pas, il se ressent. Chaque paire, chaque monture, chaque cadran est pensé pour vieillir avec grâce plutôt que pour attirer le regard un instant.</p>
+    <p data-i18n="story.p2">Nous choisissons des matières qui durent, des lignes qui ne datent pas, et un service qui traite chaque client comme un habitué de longue date.</p>
+  </div>
+</section>
+
+<section class="contact reveal" id="contact">
+  <div class="contact-shell">
+
+    <div class="contact-info">
+      <div class="contact-info-bg" aria-hidden="true">
+        <img src="images/shoe-white-shelf.jpg" alt="">
+      </div>
+      <div class="contact-info-inner">
+        <span class="ref-tag">Réf. 04</span>
+        <h2 data-i18n="contact.title">Une requête, en toute discrétion</h2>
+        <p class="contact-info-sub" data-i18n="contact.sub">Nos conseillers reviennent vers vous sous 24h pour organiser un essayage privé ou répondre à toute demande.</p>
+
+        <ul class="contact-details">
+          <li>
+            <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .5 1 1.1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.2c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z"/></svg>
+            <div>
+              <span class="cd-label" data-i18n="contact.infoPhoneLabel">Téléphone</span>
+              <span class="cd-value" data-i18n="contact.infoPhone">+212 6 00 00 00 00</span>
+            </div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="m3.5 6 8.5 7 8.5-7"/></svg>
+            <div>
+              <span class="cd-label" data-i18n="contact.infoEmailLabel">E-mail</span>
+              <span class="cd-value" data-i18n="contact.infoEmail">contact@prestivo.ma</span>
+            </div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            <div>
+              <span class="cd-label" data-i18n="contact.infoAddressLabel">Boutique</span>
+              <span class="cd-value" data-i18n="contact.infoAddress">Marrakech, Maroc</span>
+            </div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M12 7.5V12l3 2"/></svg>
+            <div>
+              <span class="cd-label" data-i18n="contact.infoHoursLabel">Horaires</span>
+              <span class="cd-value" data-i18n="contact.infoHours">Lun – Sam, 10h – 19h</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <p class="selected-product" id="selectedProduct" hidden></p>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="fLastname" data-i18n="contact.name">Nom</label>
+            <input id="fLastname" name="lastname" type="text" required autocomplete="family-name">
+          </div>
+          <div class="field">
+            <label for="fFirstname" data-i18n="contact.firstname">Prénom</label>
+            <input id="fFirstname" name="firstname" type="text" required autocomplete="given-name">
+          </div>
+          <div class="field">
+            <label for="fPhone" data-i18n="contact.phone">Numéro de téléphone</label>
+            <input id="fPhone" name="phone" type="tel" required autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="fCity" data-i18n="contact.city">Ville</label>
+            <input id="fCity" name="city" type="text" required autocomplete="address-level2">
+          </div>
+          <div class="field full">
+            <label for="fEmail" data-i18n="contact.emailLabel">E-mail</label>
+            <input id="fEmail" name="email" type="email" placeholder="votre@email.com" required data-i18n-placeholder="contact.placeholder" autocomplete="email">
+          </div>
+          <input type="hidden" id="fProduct" name="product">
+          <div class="contact-submit">
+            <button type="submit" class="btn-outline" data-i18n="contact.btn">Envoyer la demande</button>
+          </div>
+        </div>
+      </form>
+      <p class="form-note" id="formNote"></p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <img src="images/logo.svg" alt="Prestivo" class="footer-logo">
+    <nav class="footer-nav">
+      <a href="#shoes" data-i18n="nav.shoes">Chaussures</a>
+      <a href="#glasses" data-i18n="nav.glasses">Lunettes</a>
+      <a href="#watches" data-i18n="nav.watches">Montres</a>
+      <a href="#story" data-i18n="nav.story">Maison</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <p class="footer-note" data-i18n="footer.rights">© 2026 Prestivo Fashion. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
